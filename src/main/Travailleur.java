@@ -1,13 +1,9 @@
 package main;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public abstract class Travailleur {
+public class Travailleur {
     private final int id;
     private final String nom;
     private final String prenom;
@@ -24,7 +20,7 @@ public abstract class Travailleur {
         this.telephone = telephone == null ? "" : telephone;
     }
 
-    public void ajouterMission(LocalDate date, Mission mission) {
+    public void ajouterMission(LocalDate date, double mission) {
         if (date == null || mission == null) {
             return;
         }
@@ -37,12 +33,10 @@ public abstract class Travailleur {
     }
 
     public List<Mission> missionsDu(LocalDate date) {
-
         return pointages.getOrDefault(date, Collections.emptyList());
     }
 
     public int getId() {
-
         return id;
     }
     public String getNom() {
@@ -56,5 +50,8 @@ public abstract class Travailleur {
     }
     public String getTelephone() {
         return telephone;
+    }
+    public Collection<Promotion> getPromotions() {
+        return Collections.emptyList();
     }
 }

@@ -25,8 +25,15 @@ public abstract class Travailleur {
     }
 
     public void ajouterMission(LocalDate date, Mission mission) {
-        if (date == null || mission == null) throw new IllegalArgumentException("date/mission null");
-        pointages.computeIfAbsent(date, d -> new ArrayList<>()).add(mission);
+        if (date == null || mission == null) {
+            return;
+        }
+        List<Mission> missions = pointages.get(date);
+        if (missions == null) {
+            missions = new ArrayList<>();
+            pointages.put(date, missions);
+        }
+        missions.add(mission);
     }
 
     public List<Mission> missionsDu(LocalDate date) {
